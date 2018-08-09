@@ -1,0 +1,30 @@
+[
+  {
+    "name": "user",
+    "label": "User",
+    "collectionLabel": "Users",
+    "fields": [
+      {
+        "name": "firstName",
+        "label": "First Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "lastName",
+        "label": "Last Name",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "blocks": [
+      {
+        "name": "default",
+        "fields": [
+          "firstName",
+          "lastName"
+        ]
+      }
+    ]
+  }
+]
