@@ -7,7 +7,9 @@
     "build": "ng build",
     "build:lib": "yarn build --prod de-re-crud-angular-lib && cpx \"./README.md\" dist/de-re-crud-angular-lib",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "yarn format:check && ng lint",
+    "format:check": "prettier \"**/*.{ts,tsx,js,json}\" --list-different",
+    "format:write": "prettier \"**/*.{ts,tsx,js,json}\" --write",
     "e2e": "ng e2e"
   },
   "dependencies": {
@@ -46,6 +48,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^3.0.0",
+    "prettier": "^1.14.2",
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tsickle": ">=0.29.0",
