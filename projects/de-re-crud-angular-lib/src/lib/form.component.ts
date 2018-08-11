@@ -1,15 +1,13 @@
 import {
   Component,
   ViewChild,
-  OnInit,
   OnChanges,
   Input,
   Output,
   EventEmitter,
   SimpleChanges
 } from '@angular/core';
-import { h as createElement, render } from 'preact';
-import { Form, FormSubmissionCallback } from '@de-re-crud/core';
+import { renderForm, Form, FormSubmissionCallback } from '@de-re-crud/core';
 import { FormHostDirective } from './form-host.directive';
 import { FormSubmission } from './models/form-submission';
 
@@ -47,12 +45,12 @@ export class FormComponent implements OnChanges {
   }
 
   render() {
-    const element = createElement(Form, {
+    const nativeElement = this.formHost.viewContainerRef.element.nativeElement;
+
+    renderForm(Form, {
       schema: this.schema,
       struct: this.struct,
       onSubmit: this.onSubmit
-    });
-
-    render(element, this.formHost.viewContainerRef.element.nativeElement);
+    }, nativeElement);
   }
 }

@@ -20,10 +20,9 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
-    "@de-re-crud/core": "^0.1.1",
-    "@de-re-crud/renderer-bootstrap3": "^0.1.1",
+    "@de-re-crud/core": "^0.1.4",
+    "@de-re-crud/renderer-bootstrap3": "^0.1.4",
     "core-js": "^2.5.4",
-    "preact": "~8",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },
