@@ -1,10 +1,10 @@
 # De Re CRUD (Angular)
 
-This is the Angular wrapper for [Core](https://github.com/DeReCRUD/core) library.
+This is the Angular wrapper for the [De Re CRUD](https://github.com/DeReCRUD/de-re-crud) library.
 
 ## Getting Started
 
-Follow the steps listed in the [Core](https://github.com/DeReCRUD/core) library.
+Follow the steps listed in the [De Re CRUD](https://github.com/DeReCRUD/de-re-crud) library.
 
 Install library:
 
