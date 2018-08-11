@@ -1,7 +1,7 @@
 {
   "name": "@de-re-crud/angular",
   "description": "Angular wrapper for De Re CRUD",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": "https://github.com/DeReCRUD/angular.git",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
