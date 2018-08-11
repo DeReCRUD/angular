@@ -5,12 +5,8 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        DeReCrudModule,
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [DeReCrudModule],
+      declarations: [AppComponent]
     }).compileComponents();
   }));
 

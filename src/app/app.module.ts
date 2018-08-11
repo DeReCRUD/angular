@@ -4,14 +4,9 @@ import { DeReCrudModule } from 'de-re-crud-angular-lib';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    DeReCrudModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, DeReCrudModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -15,7 +15,7 @@ export class AppComponent {
 
   onSubmit = (e: FormSubmission) => {
     e.onComplete();
-  }
+  };
 
   constructor() {
     DeReCrudOptions.setDefaults({
