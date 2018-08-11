@@ -185,15 +185,15 @@
   dependencies:
     tslib "^1.9.0"
 
-"@de-re-crud/core@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.1.4.tgz#72fca18749e8b4add5968b2f37eb02d7f04b3d64"
+"@de-re-crud/core@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.1.5.tgz#4aa5284e4d8b18fb2e96a39f639d0a34c7183b19"
   dependencies:
     preact "~8"
 
-"@de-re-crud/renderer-bootstrap3@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap3/-/renderer-bootstrap3-0.1.4.tgz#d99dd8e996dafa93a3dcb0e951e03b5a2e823740"
+"@de-re-crud/renderer-bootstrap3@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap3/-/renderer-bootstrap3-0.1.5.tgz#7b6dd115ff8737f79d37a3808ffb3779125e8c6c"
   dependencies:
     preact "~8"
   optionalDependencies:
