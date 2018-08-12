@@ -15,7 +15,8 @@ import {
   IFormChangeNotificationParams,
   ICollectionReferences
 } from '@de-re-crud/core';
-import { RendererOptions, IErrors } from '@de-re-crud/core/models';
+import { IRendererOptions } from '@de-re-crud/core/models/renderer-options';
+import { IErrors } from '@de-re-crud/core/models/errors';
 import { FormHostDirective } from './form-host.directive';
 import { FormSubmission } from './models/form-submission';
 
@@ -52,7 +53,7 @@ export class FormComponent implements OnChanges {
   collectionReferences?: ICollectionReferences;
 
   @Input()
-  rendererOptions?: RendererOptions;
+  rendererOptions?: IRendererOptions;
 
   @Input()
   changeType?: FormChangeNotificationType;
