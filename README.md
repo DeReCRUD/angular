@@ -1,5 +1,7 @@
 # De Re CRUD (Angular)
 
+[![GitHub license](https://img.shields.io/github/license/DeReCRUD/angular.svg)](https://github.com/DeReCRUD/angular/blob/master/LICENSE) [![CircleCI Status](https://circleci.com/gh/DeReCRUD/angular.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/DeReCRUD/angular)
+
 This is the Angular wrapper for the [De Re CRUD](https://github.com/DeReCRUD/de-re-crud) library.
 
 ## Getting Started
