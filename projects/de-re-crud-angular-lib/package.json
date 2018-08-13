@@ -6,6 +6,6 @@
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "@de-re-crud/core": "~0.1.x"
+    "@de-re-crud/core": "~0.2.x"
   }
 }
