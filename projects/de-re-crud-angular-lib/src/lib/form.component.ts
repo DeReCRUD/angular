@@ -5,7 +5,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  SimpleChanges
+  SimpleChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   renderForm,
@@ -25,7 +26,8 @@ import { FormSubmission } from './models/form-submission';
   template: `
     <div class="de-re-crud-form-angular" drcFormHost></div>
   `,
-  styles: []
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnChanges {
   @ViewChild(FormHostDirective)
