@@ -5,7 +5,6 @@ import {
   Input,
   Output,
   EventEmitter,
-  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import {
@@ -16,10 +15,12 @@ import {
   IFormChangeNotificationParams,
   ICollectionReferences
 } from '@de-re-crud/core';
+import { IButtonOptions } from '@de-re-crud/core/models/button-options';
 import { IRendererOptions } from '@de-re-crud/core/models/renderer-options';
 import { IErrors } from '@de-re-crud/core/models/errors';
 import { FormHostDirective } from './form-host.directive';
 import { FormSubmission } from './models/form-submission';
+import { FormType } from '@de-re-crud/core/form/form.props';
 
 @Component({
   selector: 'drc-form',
@@ -32,6 +33,9 @@ import { FormSubmission } from './models/form-submission';
 export class FormComponent implements OnChanges {
   @ViewChild(FormHostDirective)
   formHost: FormHostDirective;
+
+  @Input()
+  type: FormType = 'create';
 
   @Input()
   cssClass?: string;
@@ -58,6 +62,9 @@ export class FormComponent implements OnChanges {
   rendererOptions?: IRendererOptions;
 
   @Input()
+  buttonOptions?: IButtonOptions;
+
+  @Input()
   changeType?: FormChangeNotificationType;
 
   @Output()
@@ -68,7 +75,7 @@ export class FormComponent implements OnChanges {
 
   constructor() {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.render();
   }
 
@@ -89,6 +96,7 @@ export class FormComponent implements OnChanges {
     renderForm(
       Form,
       {
+        type: this.type,
         className: this.cssClass,
         schema: this.schema,
         struct: this.struct,
@@ -97,6 +105,7 @@ export class FormComponent implements OnChanges {
         onChange: this.onChange,
         onSubmit: this.onSubmit,
         rendererOptions: this.rendererOptions,
+        buttonOptions: this.buttonOptions,
         collectionReferences: this.collectionReferences,
         errors: this.errors,
         value: this.value
