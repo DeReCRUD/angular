@@ -25,8 +25,11 @@ export function wrapNgComponent<TComponent extends IRenderer>(
 ): ComponentConstructor<TComponent> {
   const componentFactoryResolver = factory.resolveComponentFactory(ngComponent);
 
-  return wrapComponent<TComponent>((props: Readonly<TComponent>, nativeElement: Element) => {
-      let component: ComponentRef<TComponent> = cache[props.rendererId] as ComponentRef<TComponent>;
+  return wrapComponent<TComponent>(
+    (props: Readonly<TComponent>, nativeElement: Element) => {
+      let component: ComponentRef<TComponent> = cache[
+        props.rendererId
+      ] as ComponentRef<TComponent>;
 
       if (!component) {
         component = componentFactoryResolver.create(
