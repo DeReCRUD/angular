@@ -35,7 +35,7 @@ export class FormComponent implements OnChanges {
   formHost: FormHostDirective;
 
   @Input()
-  type: FormType = 'create';
+  type?: FormType;
 
   @Input()
   cssClass?: string;
@@ -53,7 +53,7 @@ export class FormComponent implements OnChanges {
   errors?: IErrors;
 
   @Input()
-  value?: any;
+  initialValue?: any;
 
   @Input()
   collectionReferences?: ICollectionReferences;
@@ -108,7 +108,7 @@ export class FormComponent implements OnChanges {
         buttonOptions: this.buttonOptions,
         collectionReferences: this.collectionReferences,
         errors: this.errors,
-        value: this.value
+        initialValue: this.initialValue
       },
       nativeElement
     );
