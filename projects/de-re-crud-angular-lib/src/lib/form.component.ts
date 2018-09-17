@@ -38,6 +38,9 @@ export class FormComponent implements OnChanges {
   type?: FormType;
 
   @Input()
+  cancelVisible: boolean;
+
+  @Input()
   cssClass?: string;
 
   @Input()
@@ -71,6 +74,9 @@ export class FormComponent implements OnChanges {
   changed = new EventEmitter<IFormChangeNotificationParams>();
 
   @Output()
+  canceled = new EventEmitter();
+
+  @Output()
   submitted = new EventEmitter<FormSubmission>();
 
   constructor() {}
@@ -81,6 +87,10 @@ export class FormComponent implements OnChanges {
 
   onChange = (params: IFormChangeNotificationParams) => {
     this.changed.emit(params);
+  };
+
+  onCancel = () => {
+    this.canceled.emit();
   };
 
   onSubmit = (value: any, cb: FormSubmissionCallback) => {
@@ -101,6 +111,7 @@ export class FormComponent implements OnChanges {
         schema: this.schema,
         struct: this.struct,
         block: this.block,
+        onCancel: this.cancelVisible ? this.onCancel : undefined,
         onChangeType: this.changeType,
         onChange: this.onChange,
         onSubmit: this.onSubmit,
