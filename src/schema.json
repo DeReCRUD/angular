@@ -1,8 +1,8 @@
 [
   {
-    "name": "user",
-    "label": "User",
-    "collectionLabel": "Users",
+    "name": "person",
+    "label": "Person",
+    "collectionLabel": "People",
     "fields": [
       {
         "name": "firstName",
@@ -15,12 +15,29 @@
         "label": "Last Name",
         "type": "text",
         "required": true
+      },
+      {
+        "name": "siblings",
+        "label": "Siblings",
+        "type": "linkedStruct",
+        "reference": {
+          "struct": "person"
+        }
       }
     ],
     "blocks": [
       {
         "name": "default",
-        "fields": ["firstName", "lastName"]
+        "fields": [
+          "firstName",
+          "lastName",
+          {
+            "field": "siblings",
+            "hints": {
+              "layout": "table"
+            }
+          }
+        ]
       }
     ]
   }

@@ -11,16 +11,23 @@ import {
   renderForm,
   Form,
   FormSubmissionCallback,
-  FormChangeNotificationType,
-  IFormChangeNotificationParams,
+  FieldChangeNotificationType,
+  IFieldChangeNotificationParams,
+  IFieldParentChangeNotificationParams,
   ICollectionReferences
 } from '@de-re-crud/core';
 import { IButtonOptions } from '@de-re-crud/core/models/button-options';
 import { IRendererOptions } from '@de-re-crud/core/models/renderer-options';
 import { IErrors } from '@de-re-crud/core/models/errors';
 import { FormHostDirective } from './form-host.directive';
-import { FormSubmission } from './models/form-submission';
-import { FormType } from '@de-re-crud/core/form/form.props';
+import {
+  IFieldParentChangeEvent,
+  IFormSubmission
+} from './models/form-submission';
+import {
+  FormType,
+  FieldParentChangeNotificationCallback
+} from '@de-re-crud/core/form/form.props';
 
 @Component({
   selector: 'drc-form',
@@ -68,16 +75,22 @@ export class FormComponent implements OnChanges {
   buttonOptions?: IButtonOptions;
 
   @Input()
-  changeType?: FormChangeNotificationType;
+  fieldChangeType?: FieldChangeNotificationType;
 
   @Output()
-  changed = new EventEmitter<IFormChangeNotificationParams>();
+  fieldChanged = new EventEmitter<IFieldChangeNotificationParams>();
+
+  @Input()
+  asyncFieldParentChanges = false;
+
+  @Output()
+  fieldParentChanged = new EventEmitter<IFieldParentChangeEvent>();
 
   @Output()
   canceled = new EventEmitter();
 
   @Output()
-  submitted = new EventEmitter<FormSubmission>();
+  submitted = new EventEmitter<IFormSubmission>();
 
   constructor() {}
 
@@ -85,8 +98,25 @@ export class FormComponent implements OnChanges {
     this.render();
   }
 
-  onChange = (params: IFormChangeNotificationParams) => {
-    this.changed.emit(params);
+  onFieldChange = (params: IFieldChangeNotificationParams) => {
+    this.fieldChanged.emit(params);
+  };
+
+  onFieldParentChange = (
+    params: IFieldParentChangeNotificationParams,
+    cb?: FieldParentChangeNotificationCallback
+  ) => {
+    const event: IFieldParentChangeEvent = {
+      params
+    };
+
+    if (this.asyncFieldParentChanges) {
+      event.onComplete = cb;
+    } else {
+      cb();
+    }
+
+    this.fieldParentChanged.emit(event);
   };
 
   onCancel = () => {
@@ -112,8 +142,9 @@ export class FormComponent implements OnChanges {
         struct: this.struct,
         block: this.block,
         onCancel: this.cancelVisible ? this.onCancel : undefined,
-        onChangeType: this.changeType,
-        onChange: this.onChange,
+        onFieldChangeType: this.fieldChangeType,
+        onFieldChange: this.onFieldChange,
+        onFieldParentChange: this.onFieldParentChange,
         onSubmit: this.onSubmit,
         rendererOptions: this.rendererOptions,
         buttonOptions: this.buttonOptions,

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { DeReCrudOptions } from '@de-re-crud/core';
-import { Bootstrap3RendererOptions } from '@de-re-crud/renderer-bootstrap3';
-import { FormSubmission } from 'de-re-crud-angular-lib';
+import { Bootstrap4RendererOptions } from '@de-re-crud/renderer-bootstrap4';
+import {
+  IFormSubmission,
+  IFieldParentChangeEvent
+} from 'de-re-crud-angular-lib';
 import schemaJson from '../schema.json';
 
 @Component({
@@ -11,15 +14,15 @@ import schemaJson from '../schema.json';
 })
 export class AppComponent {
   schema = schemaJson;
-  struct = 'user';
+  struct = 'person';
 
-  onSubmit = (e: FormSubmission) => {
+  onSubmit = (e: IFormSubmission) => {
     e.onComplete();
   };
 
   constructor() {
     DeReCrudOptions.setDefaults({
-      rendererOptions: Bootstrap3RendererOptions
+      rendererOptions: Bootstrap4RendererOptions
     });
   }
 }
