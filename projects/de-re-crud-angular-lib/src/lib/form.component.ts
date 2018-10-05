@@ -22,10 +22,12 @@ import { IErrors } from '@de-re-crud/core/models/errors';
 import { FormHostDirective } from './form-host.directive';
 import {
   IFieldParentChangeEvent,
-  IFormSubmission
+  IFormSubmission,
+  IFieldChangeEvent
 } from './models/form-submission';
 import {
   FormType,
+  FieldChangeNotificationCallback,
   FieldParentChangeNotificationCallback
 } from '@de-re-crud/core/form/form.props';
 
@@ -60,7 +62,7 @@ export class FormComponent implements OnChanges {
   block?: string;
 
   @Input()
-  errors?: IErrors;
+  initialErrors?: IErrors;
 
   @Input()
   initialValue?: any;
@@ -75,13 +77,19 @@ export class FormComponent implements OnChanges {
   buttonOptions?: IButtonOptions;
 
   @Input()
-  fieldChangeType?: FieldChangeNotificationType;
+  fieldChangeInputTimeout?: number;
 
-  @Output()
-  fieldChanged = new EventEmitter<IFieldChangeNotificationParams>();
+  @Input()
+  fieldChangeType?: FieldChangeNotificationType;
 
   @Input()
   asyncFieldParentChanges = false;
+
+  @Output()
+  fieldChanged = new EventEmitter<IFieldChangeEvent>();
+
+  @Input()
+  asyncFieldChanges = false;
 
   @Output()
   fieldParentChanged = new EventEmitter<IFieldParentChangeEvent>();
@@ -98,13 +106,26 @@ export class FormComponent implements OnChanges {
     this.render();
   }
 
-  onFieldChange = (params: IFieldChangeNotificationParams) => {
-    this.fieldChanged.emit(params);
+  onFieldChange = (
+    params: IFieldChangeNotificationParams,
+    cb: FieldChangeNotificationCallback
+  ) => {
+    const event: IFieldChangeEvent = {
+      params
+    };
+
+    if (this.asyncFieldChanges) {
+      event.onComplete = cb;
+    } else {
+      cb();
+    }
+
+    this.fieldChanged.emit(event);
   };
 
   onFieldParentChange = (
     params: IFieldParentChangeNotificationParams,
-    cb?: FieldParentChangeNotificationCallback
+    cb: FieldParentChangeNotificationCallback
   ) => {
     const event: IFieldParentChangeEvent = {
       params
@@ -142,6 +163,7 @@ export class FormComponent implements OnChanges {
         struct: this.struct,
         block: this.block,
         onCancel: this.cancelVisible ? this.onCancel : undefined,
+        onFieldChangeInputTimeout: this.fieldChangeInputTimeout,
         onFieldChangeType: this.fieldChangeType,
         onFieldChange: this.onFieldChange,
         onFieldParentChange: this.onFieldParentChange,
@@ -149,7 +171,7 @@ export class FormComponent implements OnChanges {
         rendererOptions: this.rendererOptions,
         buttonOptions: this.buttonOptions,
         collectionReferences: this.collectionReferences,
-        errors: this.errors,
+        initialErrors: this.initialErrors,
         initialValue: this.initialValue
       },
       nativeElement
