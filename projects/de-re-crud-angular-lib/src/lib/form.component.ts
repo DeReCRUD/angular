@@ -27,6 +27,7 @@ import {
 } from './models/form-submission';
 import {
   FormType,
+  Formatters,
   FieldChangeNotificationCallback,
   FieldParentChangeNotificationCallback
 } from '@de-re-crud/core/form/form.props';
@@ -66,6 +67,9 @@ export class FormComponent implements OnChanges {
 
   @Input()
   initialValue?: any;
+
+  @Input()
+  formatters?: Formatters;
 
   @Input()
   collectionReferences?: ICollectionReferences;
@@ -162,6 +166,7 @@ export class FormComponent implements OnChanges {
         schema: this.schema,
         struct: this.struct,
         block: this.block,
+        formatters: this.formatters,
         onCancel: this.cancelVisible ? this.onCancel : undefined,
         onFieldChangeInputTimeout: this.fieldChangeInputTimeout,
         onFieldChangeType: this.fieldChangeType,
