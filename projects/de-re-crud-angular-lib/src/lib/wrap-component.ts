@@ -10,9 +10,15 @@ import { wrapComponent } from '@de-re-crud/core';
 import { ComponentConstructor } from '@de-re-crud/core/models/constructors';
 import { IRenderer } from '@de-re-crud/core/models/renderers';
 
+interface IComponentCache {
+  [rendererId: string]: any;
+}
+
 export interface NgComponentConstructor<P> {
   new (...params: any[]): P & Component;
 }
+
+const cache: IComponentCache = {};
 
 class DynamicComponentLoader<TComponent> {
   private appRef: ApplicationRef;
@@ -23,8 +29,11 @@ class DynamicComponentLoader<TComponent> {
 
   constructor(
     private injector: Injector,
-    private componentConstructor: NgComponentConstructor<TComponent>
+    private componentConstructor: NgComponentConstructor<TComponent>,
+    private rendererId: string
   ) {
+    cache[rendererId] = this;
+
     this.appRef = injector.get(ApplicationRef);
     this.zone = injector.get(NgZone);
     this.componentFactoryResolver = injector.get(ComponentFactoryResolver);
@@ -65,6 +74,8 @@ class DynamicComponentLoader<TComponent> {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
+
+    delete cache[this.rendererId];
   };
 }
 
@@ -72,15 +83,23 @@ export function wrapNgComponent<TComponent extends IRenderer>(
   injector: Injector,
   ngComponent: NgComponentConstructor<TComponent>
 ): ComponentConstructor<TComponent> {
-  const dynamicComponentLoader = new DynamicComponentLoader(
-    injector,
-    ngComponent
-  );
-
   return wrapComponent<TComponent>(
     (props: Readonly<TComponent>, nativeElement: Element) => {
+      let dynamicComponentLoader: DynamicComponentLoader<TComponent> = cache[
+        props.rendererId
+      ] as DynamicComponentLoader<TComponent>;
+
+      if (!dynamicComponentLoader) {
+        dynamicComponentLoader = new DynamicComponentLoader(
+          injector,
+          ngComponent,
+          props.rendererId
+        );
+      }
+
       dynamicComponentLoader.loadComponentIfNecessary(nativeElement);
       dynamicComponentLoader.refreshComponent(props);
+
       return dynamicComponentLoader.destroyComponent;
     }
   );
