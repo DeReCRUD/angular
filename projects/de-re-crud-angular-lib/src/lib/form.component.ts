@@ -17,7 +17,6 @@ import {
   ICollectionReferences
 } from '@de-re-crud/core';
 import { IButtonOptions } from '@de-re-crud/core/models/button-options';
-import { Formatters } from '@de-re-crud/core/models/formatters';
 import { IRendererOptions } from '@de-re-crud/core/models/renderer-options';
 import { IErrors } from '@de-re-crud/core/models/errors';
 import { FormHostDirective } from './form-host.directive';
@@ -67,9 +66,6 @@ export class FormComponent implements OnChanges {
 
   @Input()
   initialValue?: any;
-
-  @Input()
-  formatters?: Formatters;
 
   @Input()
   collectionReferences?: ICollectionReferences;
@@ -166,7 +162,6 @@ export class FormComponent implements OnChanges {
         schema: this.schema,
         struct: this.struct,
         block: this.block,
-        formatters: this.formatters,
         onCancel: this.cancelVisible ? this.onCancel : undefined,
         onFieldChangeInputTimeout: this.fieldChangeInputTimeout,
         onFieldChangeType: this.fieldChangeType,
