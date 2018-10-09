@@ -4,7 +4,8 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   NgZone,
-  ApplicationRef
+  ApplicationRef,
+  EmbeddedViewRef
 } from '@angular/core';
 import { wrapComponent } from '@de-re-crud/core';
 import { ComponentConstructor } from '@de-re-crud/core/models/constructors';
@@ -39,8 +40,9 @@ class DynamicComponentLoader<TComponent> {
     this.componentFactoryResolver = injector.get(ComponentFactoryResolver);
   }
 
-  loadComponentIfNecessary = (element: Element) => {
+  renderComponent = (element: Element, inputs: any) => {
     if (typeof this.componentRef !== 'undefined' && this.element === element) {
+      this.refreshComponent(inputs);
       return;
     }
 
@@ -50,9 +52,16 @@ class DynamicComponentLoader<TComponent> {
           this.componentConstructor
         );
 
-        this.componentRef = componentFactory.create(this.injector, [], element);
+        this.componentRef = componentFactory.create(this.injector);
         this.element = element;
         this.appRef.attachView(this.componentRef.hostView);
+
+        const componentElement = (this.componentRef.hostView as EmbeddedViewRef<
+          any
+        >).rootNodes[0] as HTMLElement;
+
+        this.element.appendChild(componentElement);
+        this.refreshComponent(inputs);
       } catch (e) {
         console.error(
           'Unable to load component',
@@ -60,18 +69,20 @@ class DynamicComponentLoader<TComponent> {
           'at',
           element
         );
+
         throw e;
       }
     });
   };
 
-  refreshComponent = changes => {
-    Object.assign(this.componentRef.instance, changes);
+  refreshComponent = inputs => {
+    Object.assign(this.componentRef.instance, inputs);
     this.componentRef.changeDetectorRef.detectChanges();
   };
 
   destroyComponent = () => {
     if (this.componentRef) {
+      this.appRef.detachView(this.componentRef.hostView);
       this.componentRef.destroy();
     }
 
@@ -97,9 +108,7 @@ export function wrapNgComponent<TComponent extends IRenderer>(
         );
       }
 
-      dynamicComponentLoader.loadComponentIfNecessary(nativeElement);
-      dynamicComponentLoader.refreshComponent(props);
-
+      dynamicComponentLoader.renderComponent(nativeElement, props);
       return dynamicComponentLoader.destroyComponent;
     }
   );
