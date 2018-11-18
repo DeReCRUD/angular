@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DateRendererComponent } from './date-renderer.component';
 
 describe('DateRendererComponent', () => {
@@ -8,9 +7,8 @@ describe('DateRendererComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateRendererComponent ]
-    })
-    .compileComponents();
+      declarations: [DateRendererComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
