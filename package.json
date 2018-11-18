@@ -69,7 +69,7 @@
       "prettier --write",
       "git add"
     ],
-    "*{ts}": [
+    "*.{ts}": [
       "ng lint",
       "git add"
     ]
