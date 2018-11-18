@@ -1,12 +1,30 @@
+import { NgModule, Injector } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { DeReCrudModule } from 'de-re-crud-angular-lib';
+import { DeReCrudOptions } from '@de-re-crud/core';
+import { Bootstrap4RendererOptions } from '@de-re-crud/renderer-bootstrap4';
+import { DeReCrudModule, wrapNgComponent } from 'de-re-crud-angular-lib';
 import { AppComponent } from './app.component';
+import { DateRendererComponent } from './date-renderer/date-renderer.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, DeReCrudModule],
+  declarations: [AppComponent, DateRendererComponent],
+  imports: [BrowserModule, FormsModule, DeReCrudModule],
+  entryComponents: [DateRendererComponent],
+  exports: [DateRendererComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(injector: Injector) {
+    DeReCrudOptions.setDefaults({
+      rendererOptions: {
+        ...Bootstrap4RendererOptions,
+        components: {
+          ...Bootstrap4RendererOptions.components,
+          dateField: wrapNgComponent(injector, DateRendererComponent)
+        }
+      }
+    });
+  }
+}

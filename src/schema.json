@@ -17,6 +17,12 @@
         "required": true
       },
       {
+        "name": "birthday",
+        "label": "Birthday",
+        "type": "date",
+        "required": true
+      },
+      {
         "name": "siblings",
         "label": "Siblings",
         "type": "linkedStruct",
@@ -31,6 +37,7 @@
         "fields": [
           "firstName",
           "lastName",
+          "birthday",
           {
             "field": "siblings",
             "hints": {

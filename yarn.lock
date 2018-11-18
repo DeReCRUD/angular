@@ -204,10 +204,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@de-re-crud/core@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.7.0.tgz#634887ca8f8b6de78cf29d7b28cb5fc73679bbfa"
-  integrity sha512-vfROHoxo9Ekix0qwAssOMgybaGY1Cvpox0haurwP9ltcTHlYnTolgEgVB4oADqbAL6qsbANYrE2wOxZGXTUp5w==
+"@de-re-crud/core@^0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.7.6.tgz#baec0eccbc20f792bd8145de9048ea3ba28a28cc"
+  integrity sha512-TIKIgduXSSrmmtYWyPsm8DwAcAN5oNQjRWJ29e+0nfv83ATICMrv5UrcS3M4faqWxRVQgcXiX55vP6wxbMEhsQ==
   dependencies:
     preact "~8"
 

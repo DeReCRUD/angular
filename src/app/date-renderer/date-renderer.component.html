@@ -1,0 +1,15 @@
+<div class="date-renderer">
+  <label [for]="rendererId">{{ label }}</label>
+  <span *ngIf="required" class="required text-danger"> *</span>
+  <input
+    class="form-control"
+    [class.is-invalid]="errors && errors.length"
+    [id]="rendererId"
+    type="date"
+    [placeholder]="placeholder"
+    [disabled]="readOnly"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (change)="onChange($event)"
+  />
+</div>

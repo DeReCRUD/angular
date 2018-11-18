@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import { DeReCrudOptions } from '@de-re-crud/core';
-import { Bootstrap4RendererOptions } from '@de-re-crud/renderer-bootstrap4';
-import {
-  IFormSubmission,
-  IFieldParentChangeEvent
-} from 'de-re-crud-angular-lib';
+import { IFormSubmission } from 'de-re-crud-angular-lib';
 import schemaJson from '../schema.json';
 
 @Component({
@@ -19,10 +14,4 @@ export class AppComponent {
   onSubmit = (e: IFormSubmission) => {
     e.onComplete();
   };
-
-  constructor() {
-    DeReCrudOptions.setDefaults({
-      rendererOptions: Bootstrap4RendererOptions
-    });
-  }
 }

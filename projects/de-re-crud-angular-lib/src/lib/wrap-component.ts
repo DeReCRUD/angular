@@ -3,7 +3,6 @@ import {
   Injector,
   ComponentFactoryResolver,
   ComponentRef,
-  NgZone,
   ApplicationRef,
   EmbeddedViewRef
 } from '@angular/core';
@@ -15,7 +14,7 @@ interface IComponentCache {
   [rendererId: string]: any;
 }
 
-export interface NgComponentConstructor<P> {
+export interface INgComponentConstructor<P> {
   new (...params: any[]): P & Component;
 }
 
@@ -24,75 +23,64 @@ const cache: IComponentCache = {};
 class DynamicComponentLoader<TComponent> {
   private appRef: ApplicationRef;
   private componentFactoryResolver: ComponentFactoryResolver;
-  private zone: NgZone;
   private componentRef: ComponentRef<TComponent>;
-  private element: Element;
 
   constructor(
     private injector: Injector,
-    private componentConstructor: NgComponentConstructor<TComponent>,
-    private rendererId: string
+    private componentConstructor: INgComponentConstructor<TComponent>,
+    private onDestroy: () => void
   ) {
-    cache[rendererId] = this;
-
     this.appRef = injector.get(ApplicationRef);
-    this.zone = injector.get(NgZone);
     this.componentFactoryResolver = injector.get(ComponentFactoryResolver);
   }
 
-  renderComponent = (element: Element, inputs: any) => {
-    if (typeof this.componentRef !== 'undefined' && this.element === element) {
-      this.refreshComponent(inputs);
+  initializeComponenet = (element: Element, inputs: any) => {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.componentConstructor
+    );
+
+    this.componentRef = componentFactory.create(this.injector);
+    this.appRef.attachView(this.componentRef.hostView);
+
+    const componentView = (this.componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement;
+    element.appendChild(componentView);
+  };
+
+  updateInputs = (inputs: any) => {
+    if (!this.componentRef) {
       return;
     }
 
-    this.zone.run(() => {
-      try {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-          this.componentConstructor
-        );
-
-        this.componentRef = componentFactory.create(this.injector);
-        this.element = element;
-        this.appRef.attachView(this.componentRef.hostView);
-
-        const componentElement = (this.componentRef.hostView as EmbeddedViewRef<
-          any
-        >).rootNodes[0] as HTMLElement;
-
-        this.element.appendChild(componentElement);
-        this.refreshComponent(inputs);
-      } catch (e) {
-        console.error(
-          'Unable to load component',
-          this.componentConstructor,
-          'at',
-          element
-        );
-
-        throw e;
-      }
+    Object.keys(inputs).forEach(key => {
+      this.componentRef.instance[key] = inputs[key];
     });
-  };
 
-  refreshComponent = inputs => {
-    Object.assign(this.componentRef.instance, inputs);
     this.componentRef.changeDetectorRef.detectChanges();
   };
 
+  renderComponent = (element: Element, inputs: any) => {
+    if (!this.componentRef) {
+      this.initializeComponenet(element, inputs);
+    }
+
+    this.updateInputs(inputs);
+  };
+
   destroyComponent = () => {
+    this.onDestroy();
+
     if (this.componentRef) {
       this.appRef.detachView(this.componentRef.hostView);
       this.componentRef.destroy();
+      this.componentRef = null;
     }
-
-    delete cache[this.rendererId];
   };
 }
 
 export function wrapNgComponent<TComponent extends IRenderer>(
   injector: Injector,
-  ngComponent: NgComponentConstructor<TComponent>
+  ngComponent: INgComponentConstructor<TComponent>
 ): ComponentConstructor<TComponent> {
   return wrapComponent<TComponent>(
     (props: Readonly<TComponent>, nativeElement: Element) => {
@@ -104,8 +92,12 @@ export function wrapNgComponent<TComponent extends IRenderer>(
         dynamicComponentLoader = new DynamicComponentLoader(
           injector,
           ngComponent,
-          props.rendererId
+          () => {
+            delete cache[props.rendererId];
+          }
         );
+
+        cache[props.rendererId] = dynamicComponentLoader;
       }
 
       dynamicComponentLoader.renderComponent(nativeElement, props);
