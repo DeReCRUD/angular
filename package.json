@@ -9,8 +9,8 @@
     "test:lib": "yarn test:lib:watch --watch=false",
     "test:lib:watch": "ng test de-re-crud-angular-lib",
     "lint": "yarn format:check && ng lint",
-    "format:check": "prettier \"**/*.{ts,tsx,js,json}\" --list-different",
-    "format:write": "prettier \"**/*.{ts,tsx,js,json}\" --write",
+    "format:check": "prettier \"**/*.{ts,js,json}\" --list-different",
+    "format:write": "prettier \"**/*.{ts,js,json}\" --write",
     "e2e": "ng e2e"
   },
   "dependencies": {
@@ -41,6 +41,7 @@
     "bootstrap": "^4.1.3",
     "codelyzer": "~4.2.1",
     "cpx": "^1.5.0",
+    "husky": "^1.1.4",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -48,6 +49,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "lint-staged": "^8.0.5",
     "ng-packagr": "^3.0.0",
     "prettier": "^1.14.2",
     "protractor": "~5.3.0",
@@ -56,5 +58,20 @@
     "tslib": "^1.9.0",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*{ts}": [
+      "ng lint",
+      "git add"
+    ]
   }
 }
