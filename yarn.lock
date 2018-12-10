@@ -204,17 +204,17 @@
   dependencies:
     tslib "^1.9.0"
 
-"@de-re-crud/core@^0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.7.6.tgz#baec0eccbc20f792bd8145de9048ea3ba28a28cc"
-  integrity sha512-TIKIgduXSSrmmtYWyPsm8DwAcAN5oNQjRWJ29e+0nfv83ATICMrv5UrcS3M4faqWxRVQgcXiX55vP6wxbMEhsQ==
+"@de-re-crud/core@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.8.0.tgz#c8fa828a72ba6d4ff42ced3a84e164e324e55f98"
+  integrity sha512-SE6cj5li0cwor+Vxl+hGG3YBHaiYobxIPy60OUO+3yLg8e6+YzbTqPawTEmo2gbKF8m2zhh2NOHR8gpZcNAHPQ==
   dependencies:
     preact "~8"
 
-"@de-re-crud/renderer-bootstrap4@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap4/-/renderer-bootstrap4-0.7.0.tgz#216dba802bca60dbe06a4886c8d4ecff7e39a502"
-  integrity sha512-iD1S7RJ7c74w6QL0ENVJDNWFsbmCLp1qvVhluuhWmFdkJiZx6FDucL3W8dOud0QQ/6vggSh/+Q5FhAydvY/gFQ==
+"@de-re-crud/renderer-bootstrap4@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap4/-/renderer-bootstrap4-0.8.0.tgz#11d73ed224420db9c75881cb023a17a947e8b922"
+  integrity sha512-H4PFk75iF/LDDYKYugZPYKCYrysXTLwVvOkmL0yrp+88K2urpR2qIWFATBKiVpohmE7LRGrniLaIU89d9qEVcA==
   dependencies:
     preact "~8"
   optionalDependencies:
