@@ -17,19 +17,20 @@ import {
   ICollectionReferences
 } from '@de-re-crud/core';
 import { IButtonOptions } from '@de-re-crud/core/models/button-options';
+import { IRendererDefinitions } from '@de-re-crud/core/models/renderer-definitions';
 import { IRendererOptions } from '@de-re-crud/core/models/renderer-options';
 import { IErrors } from '@de-re-crud/core/models/errors';
+import {
+  FormType,
+  FieldChangeNotificationCallback,
+  FieldParentChangeNotificationCallback
+} from '@de-re-crud/core/form/form.props';
 import { FormHostDirective } from './form-host.directive';
 import {
   IFieldParentChangeEvent,
   IFormSubmission,
   IFieldChangeEvent
 } from './models/form-submission';
-import {
-  FormType,
-  FieldChangeNotificationCallback,
-  FieldParentChangeNotificationCallback
-} from '@de-re-crud/core/form/form.props';
 
 @Component({
   selector: 'drc-form',
@@ -69,6 +70,9 @@ export class FormComponent implements OnChanges {
 
   @Input()
   collectionReferences?: ICollectionReferences;
+
+  @Input()
+  renderers?: Partial<IRendererDefinitions>;
 
   @Input()
   rendererOptions?: IRendererOptions;
@@ -168,6 +172,7 @@ export class FormComponent implements OnChanges {
         onFieldChange: this.onFieldChange,
         onFieldParentChange: this.onFieldParentChange,
         onSubmit: this.onSubmit,
+        renderers: this.renderers,
         rendererOptions: this.rendererOptions,
         buttonOptions: this.buttonOptions,
         collectionReferences: this.collectionReferences,

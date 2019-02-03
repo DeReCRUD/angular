@@ -18,13 +18,10 @@ import { DateRendererComponent } from './date-renderer/date-renderer.component';
 export class AppModule {
   constructor(injector: Injector) {
     DeReCrudOptions.setDefaults({
-      rendererOptions: {
-        ...Bootstrap4RendererOptions,
-        components: {
-          ...Bootstrap4RendererOptions.components,
-          dateField: wrapNgComponent(injector, DateRendererComponent)
-        }
-      }
+      renderers: {
+        dateField: wrapNgComponent(injector, DateRendererComponent)
+      },
+      rendererOptions: Bootstrap4RendererOptions
     });
   }
 }
