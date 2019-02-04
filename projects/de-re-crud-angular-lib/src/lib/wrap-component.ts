@@ -34,7 +34,7 @@ class DynamicComponentLoader<TComponent> {
     this.componentFactoryResolver = injector.get(ComponentFactoryResolver);
   }
 
-  initializeComponenet = (element: Element, inputs: any) => {
+  initializeComponent = (element: Element) => {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       this.componentConstructor
     );
@@ -61,7 +61,7 @@ class DynamicComponentLoader<TComponent> {
 
   renderComponent = (element: Element, inputs: any) => {
     if (!this.componentRef) {
-      this.initializeComponenet(element, inputs);
+      this.initializeComponent(element);
     }
 
     this.updateInputs(inputs);
