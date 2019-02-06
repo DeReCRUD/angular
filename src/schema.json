@@ -23,6 +23,25 @@
         "required": true
       },
       {
+        "name": "gender",
+        "label": "Gender",
+        "type": "list",
+        "options": [
+          {
+            "label": "Male",
+            "value": "m"
+          },
+          {
+            "label": "Female",
+            "value": "f"
+          }
+        ],
+        "required": true,
+        "hints": {
+          "layout": "radio"
+        }
+      },
+      {
         "name": "siblings",
         "label": "Siblings",
         "type": "linkedStruct",
@@ -38,6 +57,7 @@
           "firstName",
           "lastName",
           "birthday",
+          "gender",
           {
             "field": "siblings",
             "hints": {

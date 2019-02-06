@@ -3,11 +3,8 @@ import {
   IFieldRenderer,
   FieldChangeEvent
 } from '@de-re-crud/core/models/renderers';
-import {
-  FieldType,
-  FieldValue,
-  SimpleFieldValue
-} from '@de-re-crud/core/models/schema';
+import { FieldType, SimpleFieldValue } from '@de-re-crud/core/models/schema';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-date-renderer',
@@ -34,13 +31,13 @@ export class DateRendererComponent implements IFieldRenderer {
   errors: string[];
 
   @Input()
-  value?: FieldValue;
+  value?: string;
 
   @Input()
   required: boolean;
 
   @Input()
-  readOnly: boolean;
+  busy: boolean;
 
   @Input()
   onFocus: (e: FocusEvent) => void;
@@ -56,4 +53,28 @@ export class DateRendererComponent implements IFieldRenderer {
 
   @Input()
   rendererId: string;
+
+  get parsedValue() {
+    if (!this.value) {
+      return null;
+    }
+
+    const date = new Date(this.value);
+
+    if (isNaN(date.valueOf())) {
+      return null;
+    }
+
+    return {
+      year: date.getFullYear(),
+      day: date.getDate(),
+      month: date.getMonth() + 1
+    };
+  }
+
+  onDateSelect(e: NgbDate) {
+    const date = new Date(e.year, e.month - 1, e.day);
+
+    this.onValueChange(date.toISOString());
+  }
 }

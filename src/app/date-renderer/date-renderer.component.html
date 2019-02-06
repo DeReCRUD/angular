@@ -1,15 +1,29 @@
 <div class="date-renderer">
   <label [for]="rendererId">{{ label }}</label>
   <span *ngIf="required" class="required text-danger"> *</span>
-  <input
-    class="form-control"
-    [class.is-invalid]="errors && errors.length"
-    [id]="rendererId"
-    type="date"
-    [placeholder]="placeholder"
-    [disabled]="readOnly"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    (change)="onChange($event)"
-  />
+  <div class="input-group">
+    <input
+      class="form-control"
+      [class.is-invalid]="errors && errors.length"
+      ngbDatepicker
+      #dp="ngbDatepicker"
+      [id]="rendererId"
+      type="text"
+      [placeholder]="placeholder"
+      [disabled]="readOnly"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      (dateSelect)="onDateSelect($event)"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        [disabled]="readOnly"
+        (click)="dp.toggle()"
+      >
+        Select
+      </button>
+    </div>
+  </div>
 </div>

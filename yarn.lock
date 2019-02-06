@@ -204,17 +204,17 @@
   dependencies:
     tslib "^1.9.0"
 
-"@de-re-crud/core@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.9.0.tgz#2ba0a551d18221c7454107e724bec6715e0caace"
-  integrity sha512-sWwW7OtV2+yU62Id7Dpu5fmfhX/5qWK3L7JjUBySonKw6qXdWichtJ3mjtg+vPY/sTYny7M6UZCHbF9bg+8RvQ==
+"@de-re-crud/core@^0.9.3":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/core/-/core-0.9.3.tgz#71ba88d2ef9730a3d5d3fef6919a61b3d89e3a0b"
+  integrity sha512-KhW7lIY+RI/PYwgFb7CMHrRbiIGTFjCDEefSp/dVAPYxCxSjIWXbTr9bRdq84R9/HnQGdkCoHXoCQnAeRwVLEw==
   dependencies:
     preact "~8"
 
-"@de-re-crud/renderer-bootstrap4@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap4/-/renderer-bootstrap4-0.9.0.tgz#74b98147f701d670819726dd713c72a5151a2b2b"
-  integrity sha512-296s+YWx0kNFmk2TsTrl2/gAo0z0sOUxeAmQVWWVWLJ56iS2gpihDn1bdJyZz4hLQK2AGai04Di1X6bNeF42Rg==
+"@de-re-crud/renderer-bootstrap4@^0.9.3":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@de-re-crud/renderer-bootstrap4/-/renderer-bootstrap4-0.9.3.tgz#701a2886b61f4e5f8829297f9ea7d54c366500fc"
+  integrity sha512-IHMAV9RynM2rFsJv5tqYFVxYlThPuV7roM1iPnt8zJxjARwS9mf4AH+/mqPdvVaEvLGZR7kCJjS6uVAaErJS+w==
   dependencies:
     preact "~8"
   optionalDependencies:
@@ -233,6 +233,13 @@
     log-symbols "^1.0.2"
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
+
+"@ng-bootstrap/ng-bootstrap@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-4.0.2.tgz#333e90190eda76879a00df85d5aa031b78f7d565"
+  integrity sha512-SBsN8ORvj/WXpZGSyR2+CRkg6GCtax5+fsLKt9ImHKUVWwePVqRxiGlnxXqwNPHQ46vOdd7nDN9cwE7dfbGaAQ==
+  dependencies:
+    tslib "^1.9.0"
 
 "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
