@@ -10,7 +10,6 @@
       [id]="rendererId"
       type="text"
       [placeholder]="placeholder"
-      [disabled]="readOnly"
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       (dateSelect)="onDateSelect($event)"
@@ -19,7 +18,6 @@
       <button
         class="btn btn-secondary"
         type="button"
-        [disabled]="readOnly"
         (click)="dp.toggle()"
       >
         Select
