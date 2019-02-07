@@ -10,16 +10,14 @@
       [id]="rendererId"
       type="text"
       [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readOnly]="readOnly"
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
       (dateSelect)="onDateSelect($event)"
     />
     <div class="input-group-append">
-      <button
-        class="btn btn-secondary"
-        type="button"
-        (click)="dp.toggle()"
-      >
+      <button class="btn btn-secondary" type="button" (click)="dp.toggle()">
         Select
       </button>
     </div>

@@ -40,6 +40,12 @@ export class DateRendererComponent implements IFieldRenderer {
   busy: boolean;
 
   @Input()
+  readOnly: boolean;
+
+  @Input()
+  disabled: boolean;
+
+  @Input()
   onFocus: (e: FocusEvent) => void;
 
   @Input()
