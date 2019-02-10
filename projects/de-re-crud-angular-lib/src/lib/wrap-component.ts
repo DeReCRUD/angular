@@ -3,9 +3,9 @@ import {
   Injector,
   ComponentFactoryResolver,
   ComponentRef,
-  ApplicationRef,
-  EmbeddedViewRef
+  ApplicationRef
 } from '@angular/core';
+import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
 import { wrapComponent } from '@de-re-crud/core';
 import { ComponentConstructor } from '@de-re-crud/core/models/constructors';
 import { IRenderer } from '@de-re-crud/core/models/renderers';
@@ -24,6 +24,8 @@ class DynamicComponentLoader<TComponent> {
   private appRef: ApplicationRef;
   private componentFactoryResolver: ComponentFactoryResolver;
   private componentRef: ComponentRef<TComponent>;
+  private portal: ComponentPortal<TComponent>;
+  private portalHost: DomPortalHost;
 
   constructor(
     private injector: Injector,
@@ -35,16 +37,20 @@ class DynamicComponentLoader<TComponent> {
   }
 
   initializeComponent = (element: Element) => {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.componentConstructor
+    if (this.componentRef) {
+      return;
+    }
+
+    this.portal = new ComponentPortal(this.componentConstructor);
+
+    this.portalHost = new DomPortalHost(
+      element,
+      this.componentFactoryResolver,
+      this.appRef,
+      this.injector
     );
 
-    this.componentRef = componentFactory.create(this.injector);
-    this.appRef.attachView(this.componentRef.hostView);
-
-    const componentView = (this.componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement;
-    element.appendChild(componentView);
+    this.componentRef = this.portalHost.attach(this.portal);
   };
 
   updateInputs = (inputs: any) => {
@@ -60,20 +66,19 @@ class DynamicComponentLoader<TComponent> {
   };
 
   renderComponent = (element: Element, inputs: any) => {
-    if (!this.componentRef) {
-      this.initializeComponent(element);
-    }
-
+    this.initializeComponent(element);
     this.updateInputs(inputs);
   };
 
   destroyComponent = () => {
     this.onDestroy();
 
-    if (this.componentRef) {
-      this.appRef.detachView(this.componentRef.hostView);
-      this.componentRef.destroy();
-      this.componentRef = null;
+    if (this.portalHost) {
+      this.portal.detach();
+      this.portal = null;
+
+      this.portalHost.dispose();
+      this.portalHost = null;
     }
   };
 }

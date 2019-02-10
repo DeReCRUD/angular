@@ -117,6 +117,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/cdk@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.1.0.tgz#14ae46730315d40b5a642daa8f5f80815930085c"
+  integrity sha512-IrM+cjeUW0TmFIZb7nMtARa9dKOVU9vXlwzllcwcBYHJNb9YcnLPaWqB2LqDQFuH/JQyt+oAG+VyfMmU+yk9uw==
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/cli@~6.1.0":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-6.1.3.tgz#a4cc751c96423cea17628d94c1419d334d7adfbf"
@@ -234,10 +241,10 @@
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
 
-"@ng-bootstrap/ng-bootstrap@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-4.0.2.tgz#333e90190eda76879a00df85d5aa031b78f7d565"
-  integrity sha512-SBsN8ORvj/WXpZGSyR2+CRkg6GCtax5+fsLKt9ImHKUVWwePVqRxiGlnxXqwNPHQ46vOdd7nDN9cwE7dfbGaAQ==
+"@ng-bootstrap/ng-bootstrap@3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-3.3.1.tgz#435eebc57dd4a371d02f342f1e919d1c4bb522a2"
+  integrity sha512-awty+5Kil0i/xIV7SSmKa5YozU83EdIx2EenF2AUDTczSKhHNhRByo82rjtwIhshN25/ZEss4aSDhgILLI88fw==
   dependencies:
     tslib "^1.9.0"
 
@@ -7691,7 +7698,7 @@ tsickle@>=0.29.0, tsickle@^0.32.1:
     source-map "^0.6.0"
     source-map-support "^0.5.0"
 
-tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
