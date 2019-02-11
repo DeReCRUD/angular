@@ -73,13 +73,17 @@ class DynamicComponentLoader<TComponent> {
   destroyComponent = () => {
     this.onDestroy();
 
-    if (this.portalHost) {
+    if (this.portal && this.portal.isAttached) {
       this.portal.detach();
-      this.portal = null;
-
-      this.portalHost.dispose();
-      this.portalHost = null;
     }
+
+    if (this.portalHost) {
+      this.portalHost.dispose();
+    }
+
+    this.portal = null;
+    this.portalHost = null;
+    this.componentRef = null;
   };
 }
 
