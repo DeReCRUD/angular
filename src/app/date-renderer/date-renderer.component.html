@@ -17,7 +17,7 @@
       (dateSelect)="onDateSelect($event)"
     />
     <div class="input-group-append">
-      <button class="btn btn-secondary" type="button" (click)="dp.toggle()">
+      <button class="btn btn-secondary" type="button" [disabled]="disabled" (click)="dp.toggle()">
         Select
       </button>
     </div>

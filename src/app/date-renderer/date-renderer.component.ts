@@ -3,7 +3,11 @@ import {
   IFieldRenderer,
   FieldChangeEvent
 } from '@de-re-crud/core/models/renderers';
-import { FieldType, SimpleFieldValue } from '@de-re-crud/core/models/schema';
+import {
+  FieldType,
+  SimpleFieldValue,
+  ICustomHints
+} from '@de-re-crud/core/models/schema';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -59,6 +63,9 @@ export class DateRendererComponent implements IFieldRenderer {
 
   @Input()
   rendererId: string;
+
+  @Input()
+  hints: ICustomHints;
 
   get parsedValue() {
     if (!this.value) {

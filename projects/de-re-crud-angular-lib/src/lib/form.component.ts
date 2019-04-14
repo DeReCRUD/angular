@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import {
   renderForm,
-  Form,
   FormSubmissionCallback,
   FieldChangeNotificationType,
   IFieldChangeNotificationParams,
@@ -61,6 +60,9 @@ export class FormComponent implements OnChanges {
 
   @Input()
   block?: string;
+
+  @Input()
+  disabled?: boolean;
 
   @Input()
   initialErrors?: IErrors;
@@ -159,13 +161,13 @@ export class FormComponent implements OnChanges {
     const nativeElement = this.formHost.viewContainerRef.element.nativeElement;
 
     renderForm(
-      Form,
       {
         type: this.type,
         className: this.cssClass,
         schema: this.schema,
         struct: this.struct,
         block: this.block,
+        disabled: this.disabled,
         onCancel: this.cancelVisible ? this.onCancel : undefined,
         onFieldChangeInputTimeout: this.fieldChangeInputTimeout,
         onFieldChangeType: this.fieldChangeType,
