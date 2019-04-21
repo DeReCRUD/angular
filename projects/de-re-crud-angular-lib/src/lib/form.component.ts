@@ -11,9 +11,11 @@ import {
   renderForm,
   FormSubmissionCallback,
   FieldChangeNotificationType,
+  FieldValue,
   IFieldChangeNotificationParams,
   IFieldParentChangeNotificationParams,
-  ICollectionReferences
+  ICollectionReferences,
+  IForm
 } from '@de-re-crud/core';
 import { IButtonOptions } from '@de-re-crud/core/models/button-options';
 import { IRendererDefinitions } from '@de-re-crud/core/models/renderer-definitions';
@@ -39,7 +41,9 @@ import {
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent implements OnChanges {
+export class FormComponent implements OnChanges, IForm {
+  private instance: IForm;
+
   @ViewChild(FormHostDirective)
   formHost: FormHostDirective;
 
@@ -157,10 +161,18 @@ export class FormComponent implements OnChanges {
     });
   };
 
+  reEvaluateConditions = () => {
+    this.instance.reEvaluateConditions();
+  };
+
+  setValue = (path: string, value?: FieldValue) => {
+    this.instance.setValue(path, value);
+  };
+
   render() {
     const nativeElement = this.formHost.viewContainerRef.element.nativeElement;
 
-    renderForm(
+    this.instance = renderForm(
       {
         type: this.type,
         className: this.cssClass,
